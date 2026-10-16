@@ -3,170 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NebulaStudy AI - Assistant de Révision Intelligent</title>
+    <title>NebulaStudy AI</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="ambient-glow"></div>
-    
-    <div class="container">
-        <!-- Barre de navigation professionnelle -->
-        <nav class="navbar">
-            <div class="logo">✨ NebulaStudy AI</div>
-            <div class="nav-actions">
-                <button id="navHomeBtn" class="nav-btn active">Accueil</button>
-                <button id="navAppBtn" class="nav-btn">Application</button>
-                <button id="navContactBtn" class="nav-btn">Contact / Support</button>
-                <button id="adminLoginBtn" class="btn-admin-access">🔑 Admin</button>
-            </div>
-        </nav>
 
-        <!-- PAGE 1 : ACCUEIL & RÈGLES (Style Gemini / Pro) -->
-        <section id="homeSection" class="hero-section">
-            <div class="hero-badge">🚀 Nouvelle génération d'apprentissage</div>
-            <h1>Transformez n'importe quel cours en savoir interactif</h1>
-            <p class="hero-desc">
-                Bienvenue sur NebulaStudy AI. Cette plateforme utilise des algorithmes de traitement intelligent pour synthétiser vos documents, générer des flashcards et créer des quiz sur-mesure.
-            </p>
-
-            <div class="rules-box">
-                <h3>📜 Règles d'utilisation & Conditions</h3>
-                <ul>
-                    <li>Respectez la propriété intellectuelle des cours importés.</li>
-                    <li>Usage strictement destiné à l'optimisation des révisions académiques.</li>
-                    <li>Tout comportement abusif entraînera un bannissement immédiat par l'administrateur.</li>
-                </ul>
-            </div>
-
-            <div class="hero-actions">
-                <button id="getStartedBtn" class="btn-glow">Accéder aux fonctionnalités ➔</button>
-            </div>
-        </section>
-
-        <!-- PAGE 2 : APPLICATION PRINCIPALE -->
-        <section id="appSection" class="app-section hidden">
-            <div class="card input-section">
-                <h2>📝 Saisie du Cours</h2>
-                <p class="section-hint">Collez le texte de votre chapitre pour générer instantanément vos outils de révision.</p>
-                <textarea id="courseInput" placeholder="Collez votre cours ici (ex: cours d'histoire, de droit, de sciences...)."></textarea>
-                <button id="generateBtn" class="btn-glow">Générer les modules d'apprentissage</button>
-            </div>
-
-            <!-- Résultats -->
-            <section id="resultsSection" class="results-container hidden">
-                <div class="tabs">
-                    <button class="tab-btn active" data-target="summaryTab">📌 Synthèse Clé</button>
-                    <button class="tab-btn" data-target="flashcardTab">🃏 Flashcards Intelligentes</button>
-                    <button class="tab-btn" data-target="quizTab">✍️ Quiz d'Évaluation</button>
-                </div>
-
-                <div id="summaryTab" class="tab-content active">
-                    <h3>Points essentiels à retenir</h3>
-                    <ul id="summaryList"></ul>
-                </div>
-
-                <div id="flashcardTab" class="tab-content">
-                    <h3>Cartes de mémorisation active (Cliquez pour retourner)</h3>
-                    <div id="flashcardContainer" class="flashcard">
-                        <div class="flashcard-inner">
-                            <div class="flashcard-front" id="fcFront">Générez un cours pour commencer</div>
-                            <div class="flashcard-back" id="fcBack">La réponse apparaîtra ici</div>
-                        </div>
-                    </div>
-                    <div class="flashcard-controls">
-                        <button id="prevCard" class="btn-secondary">Précédent</button>
-                        <span id="cardCounter">0 / 0</span>
-                        <button id="nextCard" class="btn-secondary">Suivant</button>
-                    </div>
-                </div>
-
-                <div id="quizTab" class="tab-content">
-                    <h3>Testez vos connaissances</h3>
-                    <div id="quizContainer">
-                        <p id="quizQuestion">Préparez votre quiz...</p>
-                        <div id="quizOptions" class="options-grid"></div>
-                        <button id="nextQuizBtn" class="btn-glow hidden" style="width:auto; margin-top:1rem;">Question suivante</button>
-                    </div>
-                    <div id="quizScore" class="hidden"></div>
-                </div>
-            </section>
-        </section>
-
-        <!-- PAGE 3 : CONTACT & SUPPORT -->
-        <section id="contactSection" class="contact-section hidden">
-            <div class="card contact-card">
-                <h2>📬 Contactez l'Administrateur</h2>
-                <p class="section-hint">Vous rencontrez un problème technique ou souhaitez faire une suggestion ? Écrivez directement ici, le message arrivera dans le panneau admin.</p>
-                
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label>Votre Nom ou Pseudo</label>
-                        <input type="text" id="contactName" placeholder="Ex: Jean Dupont" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Votre Message / Problème rencontré</label>
-                        <textarea id="contactMessage" placeholder="Expliquez votre problème ici..." required style="height:120px;"></textarea>
-                    </div>
-                    <button type="submit" class="btn-glow">Envoyer le message à l'admin</button>
-                </form>
-                <div id="contactSuccess" class="hidden success-msg">✨ Message envoyé avec succès à l'administrateur !</div>
-            </div>
-        </section>
-
-        <!-- PANNEAU ADMINISTRATEUR (Sécurisé) -->
-        <section id="adminPanel" class="card admin-panel hidden">
-            <div class="admin-header-bar">
-                <h2>🛡️ Tableau de Bord Administrateur</h2>
-                <button id="closeAdminBtn" class="btn-secondary">Fermer l'Admin</button>
-            </div>
-            <p class="admin-subtitle">Espace réservé et sécurisé pour le créateur.</p>
-            
-            <div class="stats-box">
-                <div class="stat-card">
-                    <span class="stat-number" id="visitorCount">1</span>
-                    <span class="stat-label">Visiteurs totaux</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" id="msgCount">0</span>
-                    <span class="stat-label">Messages reçus</span>
-                </div>
-            </div>
-
-            <!-- Boîte de réception des messages utilisateurs -->
-            <div class="admin-section-block">
-                <h3>📥 Messages reçus des utilisateurs</h3>
-                <div id="adminMessagesList" class="messages-list">
-                    <p style="color:#94a3b8; font-size:0.9rem;">Aucun message pour le moment.</p>
-                </div>
-            </div>
-
-            <div class="admin-section-block" style="margin-top:2rem;">
-                <h3>⚙️ Gestion des accès (Bannissement)</h3>
-                <div id="userListContainer" class="user-list">
-                    <!-- Rempli dynamiquement -->
-                </div>
-            </div>
-        </section>
-
-        <!-- MODALE DE CONNEXION ADMIN -->
-        <div id="adminModal" class="modal hidden">
-            <div class="modal-content">
-                <h3>Accès Administrateur</h3>
-                <p>Entrez votre mot de passe secret :</p>
-                <input type="password" id="adminPasswordInput" placeholder="Mot de passe admin">
-                <div class="modal-buttons">
-                    <button id="submitAdminLogin" class="btn-glow" style="padding:0.6rem 1rem;">Valider</button>
-                    <button id="cancelAdminLogin" class="btn-secondary">Annuler</button>
-                </div>
-            </div>
+    <!-- SECTION ACCUEIL -->
+    <div id="home-section" class="container">
+        <h1>NebulaStudy AI</h1>
+        <p>Bienvenue sur NebulaStudy AI. Cette plateforme utilise des algorithmes de traitement intelligent pour synthétiser vos documents, générer des flashcards et créer des quiz sur-mesure.</p>
+        
+        <div class="rules-box">
+            <h3>Règles d'utilisation & Conditions</h3>
+            <ul>
+                <li>Respectez la propriété intellectuelle des cours importés.</li>
+                <li>Usage strictement destiné à l'optimisation des révisions académiques.</li>
+                <li>Tout comportement abusif entraînera un bannissement immédiat par l'administrateur.</li>
+            </ul>
         </div>
 
-        <footer>
-            <p>NebulaStudy AI • Conçu pour l'excellence académique 💜 💖 💙</p>
-        </footer>
+        <button id="access-btn" class="btn-primary">Accéder aux fonctionnalités →</button>
+        <br><br>
+        <button id="admin-open-btn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.85rem;">Accès Administrateur</button>
+    </div>
+
+    <!-- ÉCRAN DE CHARGEMENT -->
+    <div id="loader-screen" class="container hidden">
+        <div class="spinner"></div>
+        <p style="font-weight:600; margin-bottom:0;">Patientez s'il vous plaît...</p>
+    </div>
+
+    <!-- SECTION ADMIN (Isolée, cache l'accueil) -->
+    <div id="admin-section" class="container hidden">
+        <h1>Tableau de Bord</h1>
+        <p>Espace réservé et sécurisé pour l'administrateur.</p>
+        <div class="rules-box">
+            <p><strong>Visiteurs totaux :</strong> 3</p>
+            <p><strong>Messages reçus :</strong> 1</p>
+        </div>
+        <button id="admin-close-btn" class="btn-primary">Fermer l'Admin</button>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+Envoyé
+Rédiger
+Écrire à Davy Pasquale
+
