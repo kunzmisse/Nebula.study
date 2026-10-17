@@ -15,13 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             loaderScreen.classList.add("hidden");
             callback();
-        }, 1200);
+        }, 1000);
     }
 
     if (accessBtn) {
         accessBtn.addEventListener("click", () => {
             showLoaderAndExecute(() => {
-                alert("Redirection vers les outils de révision et flashcards !");
+                alert("Redirection vers les outils de révision !");
                 homeSection.classList.remove("hidden");
             });
         });
@@ -43,4 +43,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-
