@@ -2,100 +2,1650 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NebulaStudy AI</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Hébergement - Nebulastudy</title>
+    <meta name="description" content="Déployez et gérez vos bots sur HACKERS HUB- Console interactive, logs temps réel, commandes SSH">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============================================
+           THEME PREMIUM - MODERNE & HAUT DE GAMME
+        ============================================ */
+        :root {
+            --accent: #5b6cff;
+            --accent-light: #7c8cff;
+            --accent-dark: #3a48d9;
+            --accent-soft: #eef1ff;
+            --secondary: #14b8a6;
+            --secondary-dark: #0d9488;
+            --secondary-soft: #dffaf6;
+            --bg: #f5f7ff;
+            --bg-deep: #eef2ff;
+            --surface: rgba(255, 255, 255, 0.62);
+            --surface-solid: #ffffff;
+            --text: #0f172a;
+            --text-light: #475569;
+            --text-muted: #94a3b8;
+            --border: rgba(91, 108, 255, 0.12);
+            --border-strong: rgba(91, 108, 255, 0.25);
+            --radius: 24px;
+            --radius-lg: 34px;
+            --radius-xl: 48px;
+            --shadow-sm: 0 10px 30px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 20px 50px rgba(15, 23, 42, 0.10);
+            --shadow-lg: 0 30px 80px rgba(91, 108, 255, 0.18);
+            --shadow-xl: 0 40px 100px rgba(91, 108, 255, 0.22);
+            --gradient-main: linear-gradient(135deg, #5b6cff 0%, #7c8cff 40%, #14b8a6 100%);
+            --green: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: 
+                radial-gradient(circle at 0% 0%, #dbe4ff 0%, transparent 45%),
+                radial-gradient(circle at 100% 100%, #d7fff7 0%, transparent 45%),
+                var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+            letter-spacing: -0.02em;
+            font-weight: 500;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.35;
+            animation: floatOrb 22s infinite alternate ease-in-out;
+        }
+
+        .orb1 {
+            width: 650px;
+            height: 650px;
+            background: radial-gradient(circle, rgba(91, 108, 255, 0.5), rgba(91, 108, 255, 0.05));
+            top: -250px;
+            left: -150px;
+        }
+
+        .orb2 {
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.4), rgba(20, 184, 166, 0.05));
+            bottom: -180px;
+            right: -120px;
+            animation-duration: 28s;
+        }
+
+        .orb3 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(91, 108, 255, 0.35), rgba(91, 108, 255, 0.02));
+            top: 40%;
+            left: 40%;
+            animation-duration: 26s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            100% { transform: translate(60px, -80px) scale(1.2) rotate(8deg); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.6;
+            }
+            85% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) translateX(80px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Topbar */
+        .topbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.62);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hamburger {
+            background: transparent;
+            border: none;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background: rgba(91, 108, 255, 0.1);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+            width: 24px;
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scale(0);
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+            width: 24px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            border-radius: 16px;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 800;
+            box-shadow: 0 6px 20px rgba(91, 108, 255, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .topbar-coins {
+            background: rgba(91, 108, 255, 0.12);
+            border: 1px solid var(--border);
+            border-radius: 60px;
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .topbar-coins:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+            background: rgba(91, 108, 255, 0.2);
+        }
+
+        .topbar-coins i {
+            color: var(--warning);
+        }
+
+        .avatar-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(91, 108, 255, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .avatar-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(91, 108, 255, 0.35);
+        }
+
+        /* Drawer Sidebar */
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 199;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .drawer-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(24px);
+            border-right: 1px solid var(--border);
+            box-shadow: 10px 0 40px rgba(91, 108, 255, 0.15);
+            z-index: 200;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .close-drawer {
+            background: transparent;
+            border: none;
+            font-size: 28px;
+            color: var(--text-muted);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .close-drawer:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        .drawer-user {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .drawer-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .drawer-username {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        .drawer-coins {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--warning);
+            margin: 4px 0;
+        }
+
+        .drawer-role-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .drawer-nav {
+            flex: 1;
+            padding: 16px 16px;
+        }
+
+        .nav-section {
+            margin: 24px 0 8px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 4px;
+        }
+
+        .nav-item i {
+            width: 20px;
+            font-size: 16px;
+            color: var(--accent);
+        }
+
+        .nav-item:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+            transform: translateX(6px);
+        }
+
+        .nav-item.active {
+            background: var(--gradient-main);
+            color: white;
+            box-shadow: 0 4px 12px rgba(91, 108, 255, 0.3);
+        }
+
+        .nav-item.active i {
+            color: white;
+        }
+
+        .drawer-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 60px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--error);
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 100px 5% 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Layout 2 colonnes */
+        .deploy-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @media (max-width: 1000px) {
+            .deploy-layout { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.64);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            margin-bottom: 28px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .card-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+
+        .card-header h3 i {
+            color: var(--accent);
+        }
+
+        /* Bot Selector */
+        .bot-selector select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1.5px solid var(--border);
+            border-radius: 60px;
+            background: white;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .bot-selector select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(91, 108, 255, 0.1);
+        }
+
+        .bot-info {
+            margin-top: 20px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: var(--radius);
+        }
+
+        .bot-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .bot-badge {
+            padding: 4px 12px;
+            border-radius: 60px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .bot-badge.free {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--green);
+        }
+
+        .bot-badge.premium {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+
+        /* Env Vars */
+        .env-row {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .env-key {
+            flex: 1;
+            min-width: 140px;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 60px;
+            background: white;
+            color: var(--text);
+            font-family: monospace;
+            font-weight: 600;
+        }
+
+        .env-value {
+            flex: 2;
+            min-width: 200px;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 60px;
+            background: white;
+            color: var(--text);
+            font-family: inherit;
+        }
+
+        .env-value:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(91, 108, 255, 0.1);
+        }
+
+        .env-required {
+            color: var(--error);
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .cost-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--warning);
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+
+        .coins-balance {
+            text-align: center;
+            padding: 12px;
+            border-radius: 60px;
+            background: var(--accent-soft);
+            display: inline-block;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .btn-deploy {
+            width: 100%;
+            padding: 18px;
+            background: var(--gradient-main);
+            border: none;
+            border-radius: 60px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(91, 108, 255, 0.3);
+        }
+
+        .btn-deploy:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(91, 108, 255, 0.4);
+        }
+
+        .btn-deploy:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Servers List */
+        .servers-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .server-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: var(--radius);
+            padding: 18px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .server-item:hover {
+            border-color: var(--accent);
+            transform: translateX(6px);
+        }
+
+        .server-item.active {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .server-name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .server-status {
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 60px;
+            font-weight: 600;
+        }
+
+        .server-status.running { background: rgba(16, 185, 129, 0.15); color: var(--green); }
+        .server-status.stopped { background: rgba(100, 116, 139, 0.1); color: var(--text-muted); }
+        .server-status.suspended { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+        .server-status.deploying { background: rgba(59, 130, 246, 0.15); color: var(--info); }
+        .server-status.failed { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+
+        .server-days {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .server-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .server-action-btn {
+            background: rgba(91, 108, 255, 0.1);
+            border: none;
+            padding: 6px 16px;
+            border-radius: 60px;
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .server-action-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Power Controls */
+        .power-controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .power-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 60px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .power-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            transform: translateY(-2px);
+        }
+
+        .power-btn.start:hover { background: rgba(16, 185, 129, 0.15); border-color: var(--green); color: var(--green); }
+        .power-btn.stop:hover { background: rgba(239, 68, 68, 0.15); border-color: var(--error); color: var(--error); }
+
+        /* Console */
+        .console-container {
+            background: #0f172a;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-top: 16px;
+        }
+
+        .console-output {
+            height: 320px;
+            overflow-y: auto;
+            padding: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            background: #0f172a;
+            color: #cbd5e1;
+        }
+
+        .console-line {
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            gap: 12px;
+        }
+
+        .console-time {
+            color: #64748b;
+            min-width: 80px;
+        }
+
+        .console-message {
+            color: #cbd5e1;
+            word-break: break-word;
+            flex: 1;
+        }
+
+        .console-message.error { color: var(--error); }
+        .console-message.warn { color: var(--warning); }
+        .console-message.success { color: var(--green); }
+        .console-message.sys { color: var(--info); }
+
+        .console-input-area {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            border-top: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .console-input {
+            flex: 1;
+            background: #1e293b;
+            border: 1px solid var(--border);
+            border-radius: 60px;
+            padding: 12px 20px;
+            color: white;
+            font-family: monospace;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .console-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(91, 108, 255, 0.2);
+        }
+
+        .console-send-btn {
+            background: var(--accent);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .console-send-btn:hover {
+            transform: scale(1.05);
+            background: var(--accent-light);
+        }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toast {
+            background: var(--text);
+            backdrop-filter: blur(16px);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 60px;
+            border-left: 4px solid var(--accent);
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+            box-shadow: var(--shadow-md);
+        }
+
+        .toast.success { border-left-color: var(--green); }
+        .toast.error { border-left-color: var(--error); }
+        .toast.info { border-left-color: var(--accent); }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Modal déploiement */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(14px);
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .swipe-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 12px 28px;
+            border-radius: 80px;
+            border: 1px solid rgba(91, 108, 255, 0.4);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 98;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            animation: swipeBounce 2s infinite;
+            cursor: pointer;
+            transition: opacity 0.5s;
+            white-space: nowrap;
+        }
+        .swipe-indicator.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        @keyframes swipeBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--accent-soft); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+        @media (max-width: 768px) {
+            .main-content { padding: 100px 20px 40px; }
+            .env-row { flex-direction: column; }
+            .power-controls { flex-direction: column; }
+            .power-btn { width: 100%; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Barre supérieure avec le menu burger -->
-    <div class="top-nav">
-        <button id="burger-menu-btn" class="burger-btn" title="Menu et Admin">☰</button>
-    </div>
+<div class="animated-bg">
+    <div class="gradient-orb orb1"></div>
+    <div class="gradient-orb orb2"></div>
+    <div class="gradient-orb orb3"></div>
+</div>
+<div class="particles" id="particles"></div>
 
-    <!-- 1. ACCUEIL RICHE -->
-    <div id="home-section" class="container">
-        <h1>NebulaStudy AI</h1>
-        <p class="subtitle">L'écosystème intelligent ultime pour optimiser vos révisions, synthétiser vos cours et générer vos flashcards sur-mesure.</p>
-        
-        <div class="feature-grid">
-            <div class="feature-card">
-                <h3>01 — Synthèse Intelligente</h3>
-                <p>Transformez des documents complexes en résumés structurés instantanément grâce à notre moteur IA avancé.</p>
-            </div>
-            <div class="feature-card">
-                <h3>02 — Flashcards Interactives</h3>
-                <p>Mémorisez vos chapitres clés de façon active et durable avec des cartes générées sur-mesure.</p>
-            </div>
-            <div class="feature-card">
-                <h3>03 — Examens & Quiz Blancs</h3>
-                <p>Testez vos connaissances en conditions réelles avec des questionnaires d'évaluation adaptés.</p>
+<header class="topbar">
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+    <div class="logo-area">
+        <div class="logo-mark">BH</div>
+        <span class="logo-text">BOTHUB</span>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-coins" id="topbarCoins">
+            <i class="fas fa-coins"></i> <span id="topbarCoinsValue">0</span>
+        </div>
+        <div class="avatar-circle" id="avatarBtn">?</div>
+    </div>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="drawer">
+    <div class="drawer-header">
+        <div class="logo-mark">BH</div>
+        <button class="close-drawer" id="closeDrawerBtn">&times;</button>
+    </div>
+    <div class="drawer-user">
+        <div class="drawer-avatar" id="drawerAvatar">?</div>
+        <div>
+            <div class="drawer-username" id="drawerUsername">...</div>
+            <div class="drawer-coins"><i class="fas fa-coins"></i> <span id="drawerCoins">0</span> coins</div>
+            <span class="drawer-role-badge" id="drawerRole">Utilisateur</span>
+        </div>
+    </div>
+    <nav class="drawer-nav">
+        <div class="nav-section">PRINCIPAL</div>
+        <a href="/dashboard" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a>
+        <a href="/payment" class="nav-item"><i class="fas fa-credit-card"></i> Paiement</a>
+        <a href="/deploy" class="nav-item active"><i class="fas fa-rocket"></i> Hébergement</a>
+        <a href="/profile" class="nav-item"><i class="fas fa-user-circle"></i> Mon Profil</a>
+        <a href="/referral" class="nav-item"><i class="fas fa-gift"></i> Parrainage</a>
+        <a href="/bots" class="nav-item"><i class="fas fa-robot"></i> Bots</a>
+        <a href="/premium" class="nav-item"><i class="fas fa-crown"></i> Premium</a>
+        <a href="/info" class="nav-item"><i class="fas fa-info-circle"></i> Informations</a>
+        <div id="adminMenuGroup" style="display:none;">
+            <div class="nav-section">ADMINISTRATION</div>
+            <a href="/admin" class="nav-item"><i class="fas fa-shield-alt"></i> Administration</a>
+        </div>
+    </nav>
+    <div class="drawer-footer">
+        <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+    </div>
+</aside>
+
+<div class="swipe-indicator" id="swipeIndicator">
+    <i class="fas fa-chevron-up"></i> Déployez vos bots <i class="fas fa-chevron-down"></i>
+</div>
+
+<main class="main-content">
+    <div class="deploy-layout">
+        <!-- Colonne gauche : Nouveau déploiement -->
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-plus-circle"></i> Nouveau déploiement</h3>
+                </div>
+                <div class="bot-selector">
+                    <label style="display: block; margin-bottom: 12px; font-weight: 600;"><i class="fas fa-robot"></i> Choisissez un bot</label>
+                    <select id="botSelect">
+                        <option value="">-- Chargement des bots --</option>
+                    </select>
+                </div>
+                <div id="botInfo" style="display: none;">
+                    <div class="bot-info">
+                        <div class="bot-name">
+                            <span id="botName">-</span>
+                            <span id="botBadge"></span>
+                        </div>
+                        <p style="margin-top: 8px; color: var(--text-light);"><i class="fas fa-user-circle"></i> <span id="botDev"></span></p>
+                        <p id="botDesc" style="margin-top: 8px; font-size: 13px; color: var(--text-muted);"></p>
+                    </div>
+                </div>
+                <div id="envVarsSection" style="display: none;">
+                    <h4 style="margin: 20px 0 12px;"><i class="fas fa-code-branch"></i> Variables d'environnement</h4>
+                    <div id="envVarsList"></div>
+                </div>
+                <div class="cost-amount"><i class="fas fa-coins"></i> 10 coins = 10 jours</div>
+                <div class="coins-balance" id="coinsBalance">💰 Solde: -- coins</div>
+                <button class="btn-deploy" id="deployBtn" disabled><i class="fas fa-rocket"></i> Déployer (10 coins)</button>
             </div>
         </div>
 
-        <button id="access-btn" class="btn-primary">Accéder aux Synthèses & Flashcards →</button>
-        <button id="quiz-btn" class="btn-secondary">Lancer un Quiz d'Examen</button>
-
-        <!-- Formulaire de contact / message vers l'admin -->
-        <div class="feature-card" style="margin-top: 25px;">
-            <h3>Contactez l'administration</h3>
-            <p style="margin-bottom: 12px;">Une suggestion ou un problème ? Envoyez un message direct à l'équipe.</p>
-            <input type="text" id="visitor-name" placeholder="Votre nom...">
-            <textarea id="visitor-msg" style="height: 80px;" placeholder="Votre message..."></textarea>
-            <button id="send-msg-btn" class="btn-secondary" style="margin-bottom:0;">Envoyer le message</button>
-        </div>
-    </div>
-
-    <!-- ÉCRAN DE CHARGEMENT FLUIDE -->
-    <div id="loader-screen" class="container hidden">
-        <div class="spinner"></div>
-        <p style="font-weight:600; margin-bottom:0; color:var(--text-muted);">Chargement de l'environnement sécurisé...</p>
-    </div>
-
-    <!-- 2. ESPACE TRAVAIL / SYNTHÈSE -->
-    <div id="app-section" class="container hidden">
-        <h1>Espace de Révision</h1>
-        <p class="subtitle">Collez votre cours ci-dessous pour lancer la génération automatique.</p>
-        <textarea id="course-input" placeholder="Collez votre cours, vos notes ou votre chapitre ici..."></textarea>
-        <button id="generate-btn" class="btn-primary">Générer le contenu pédagogique</button>
-        <div id="result-box" style="margin-top: 20px; text-align: left; font-size: 0.9rem;"></div>
-        <br>
-        <button id="back-home-btn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; text-decoration:underline; width:100%; text-align:center;">← Retour à l'accueil</button>
-    </div>
-
-    <!-- 3. ESPACE QUIZ -->
-    <div id="quiz-section" class="container hidden">
-        <h1>Session Quiz & Examen</h1>
-        <p class="subtitle">Évaluez votre niveau sur vos chapitres.</p>
-        <div class="feature-card" style="margin-bottom: 20px;">
-            <h3>Questionnaire d'entraînement</h3>
-            <p>Êtes-vous prêt à valider vos acquis pour vos examens ?</p>
-        </div>
-        <button id="back-home-quiz-btn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; text-decoration:underline; width:100%; text-align:center;">← Retour à l'accueil</button>
-    </div>
-
-    <!-- 4. ESPACE ADMINISTRATEUR SÉCURISÉ -->
-    <div id="admin-section" class="container hidden">
-        <h1>Tableau de Bord Admin</h1>
-        <p class="subtitle">Espace hautement sécurisé et centralisé.</p>
-        
-        <div class="feature-grid">
-            <div class="feature-card">
-                <h3>Statistiques en direct</h3>
-                <p><strong>Visiteurs totaux :</strong> <span id="visitor-count">0</span></p>
-                <p><strong>Statut du système :</strong> Opérationnel (Render)</p>
+        <!-- Colonne droite : Serveurs déployés + Console -->
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-server"></i> Mes bots déployés</h3>
+                </div>
+                <div class="servers-list" id="serversList">
+                    <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+                        <i class="fas fa-spinner fa-pulse"></i> Chargement...
+                    </div>
+                </div>
             </div>
-            <div class="feature-card">
-                <h3>Boîte de réception des messages</h3>
-                <div id="admin-messages-list" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
-                    <p style="color:var(--text-muted); font-size:0.85rem;">Aucun message pour le moment.</p>
+
+            <div class="card" id="selectedServerCard" style="display: none;">
+                <div class="card-header">
+                    <h3><i class="fas fa-terminal"></i> Console - <span id="selectedServerName">-</span></h3>
+                    <span class="server-status" id="selectedServerStatus">-</span>
+                </div>
+                <div class="power-controls">
+                    <button class="power-btn start" onclick="sendPowerAction('start')"><i class="fas fa-play"></i> Démarrer</button>
+                    <button class="power-btn stop" onclick="sendPowerAction('stop')"><i class="fas fa-stop"></i> Arrêter</button>
+                    <button class="power-btn" onclick="sendPowerAction('restart')"><i class="fas fa-sync-alt"></i> Redémarrer</button>
+                    <button class="power-btn" onclick="renewCurrentServer()"><i class="fas fa-coins"></i> Renouveler</button>
+                </div>
+                <div class="console-container">
+                    <div class="console-output" id="consoleOutput">
+                        <div class="console-line">
+                            <span class="console-time">--:--:--</span>
+                            <span class="console-message sys">Sélectionnez un serveur pour voir la console</span>
+                        </div>
+                    </div>
+                    <div class="console-input-area">
+                        <input type="text" class="console-input" id="consoleInput" placeholder="Entrez une commande... (ex: ls, npm start)" disabled>
+                        <button class="console-send-btn" id="consoleSendBtn" disabled><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="noServerCard" style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+                <div style="text-align: center; color: var(--text-muted);">
+                    <i class="fas fa-rocket fa-3x" style="margin-bottom: 16px;"></i>
+                    <p>Sélectionnez un bot à gauche pour commencer,<br>ou cliquez sur un serveur dans la liste.</p>
                 </div>
             </div>
         </div>
-
-        <button id="admin-close-btn" class="btn-primary">Fermer l'Administration</button>
     </div>
+</main>
 
-    <script src="script.js"></script>
+<div class="toast-container" id="toastContainer"></div>
+<div class="modal" id="deployModal">
+    <div class="modal-content">
+        <i class="fas fa-spinner fa-2x" style="color: var(--accent);"></i>
+        <h3 style="margin: 16px 0;">Déploiement en cours</h3>
+        <p id="deployMessage">Initialisation...</p>
+        <div class="modal-spinner"></div>
+    </div>
+</div>
+
+<script>
+    const API_BASE = window.location.origin;
+    let authToken = localStorage.getItem('bothub_token') || localStorage.getItem('token');
+    if (!authToken || authToken === 'undefined' || authToken === 'null') {
+        window.location.href = '/login';
+    }
+    
+    let currentUser = null;
+    let selectedBot = null;
+    let envVars = {};
+    let myServers = [];
+    let currentServer = null;
+    let currentSSE = null;
+    
+    // ========== UTILITAIRES ==========
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i> ${message}`;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+    }
+    
+    async function fetchAPI(endpoint, options = {}) {
+        const res = await fetch(`${API_BASE}${endpoint}`, {
+            headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' },
+            ...options
+        });
+        if (res.status === 401 || res.status === 403) {
+            localStorage.removeItem('bothub_token');
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+            throw new Error('Unauthorized');
+        }
+        return res.json();
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
+    }
+    
+    // ========== CHARGEMENT PROFIL ==========
+    async function loadUserProfile() {
+        try {
+            const res = await fetch(`${API_BASE}/api/auth/me`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' }
+            });
+            if (!res.ok) throw new Error();
+            const data = await res.json();
+            if (data.success && data.user) {
+                currentUser = data.user;
+                document.getElementById('topbarCoinsValue').innerText = currentUser.coins || 0;
+                document.getElementById('drawerCoins').innerText = currentUser.coins || 0;
+                document.getElementById('drawerUsername').innerText = currentUser.username || currentUser.email?.split('@')[0] || 'Utilisateur';
+                const initial = (currentUser.email?.charAt(0) || 'U').toUpperCase();
+                document.getElementById('drawerAvatar').innerText = initial;
+                document.getElementById('avatarBtn').innerText = initial;
+                document.getElementById('drawerRole').innerText = currentUser.role === 'admin' ? 'Admin' : (currentUser.role === 'superadmin' ? 'Super Admin' : 'Utilisateur');
+                document.getElementById('coinsBalance').innerHTML = `💰 Solde: <strong style="color: var(--warning);">${currentUser.coins}</strong> coins`;
+                if (currentUser.role === 'admin' || currentUser.role === 'superadmin') {
+                    document.getElementById('adminMenuGroup').style.display = 'block';
+                }
+                updateDeployBtn();
+                return currentUser;
+            }
+        } catch(e) { console.error('Erreur profil:', e); showToast('Erreur chargement profil', 'error'); }
+        return null;
+    }
+    
+    // ========== CHARGEMENT BOTS ==========
+    async function loadBots() {
+        try {
+            const [freeBots, premiumBots] = await Promise.all([
+                fetchAPI('/api/bots'),
+                fetchAPI('/api/bots/premium')
+            ]);
+            const allBots = [...(freeBots || []), ...(premiumBots || [])];
+            const select = document.getElementById('botSelect');
+            select.innerHTML = '<option value="">-- Sélectionnez un bot --</option>';
+            for (const bot of allBots) {
+                const option = document.createElement('option');
+                option.value = bot.id;
+                option.textContent = `${bot.botName} (${bot.isPremium ? 'Premium' : 'Gratuit'}) - ${bot.devName}`;
+                option.dataset.bot = JSON.stringify(bot);
+                select.appendChild(option);
+            }
+            
+            select.onchange = () => {
+                const selected = select.options[select.selectedIndex];
+                if (!select.value || !selected.dataset.bot) {
+                    selectedBot = null;
+                    document.getElementById('botInfo').style.display = 'none';
+                    document.getElementById('envVarsSection').style.display = 'none';
+                    updateDeployBtn();
+                    return;
+                }
+                selectedBot = JSON.parse(selected.dataset.bot);
+                document.getElementById('botName').innerText = selectedBot.botName;
+                document.getElementById('botDev').innerText = selectedBot.devName;
+                document.getElementById('botBadge').innerHTML = selectedBot.isPremium ? 
+                    '<span class="bot-badge premium"><i class="fas fa-crown"></i> Premium</span>' : 
+                    '<span class="bot-badge free"><i class="fas fa-gem"></i> Gratuit</span>';
+                document.getElementById('botDesc').innerHTML = selectedBot.description || '';
+                document.getElementById('botInfo').style.display = 'block';
+                loadEnvSchema();
+                updateDeployBtn();
+            };
+        } catch(e) { console.error('Erreur chargement bots:', e); showToast('Erreur chargement des bots', 'error'); }
+    }
+    
+    function loadEnvSchema() {
+        envVars = {};
+        const container = document.getElementById('envVarsList');
+        if (!selectedBot.env_vars_schema) {
+            document.getElementById('envVarsSection').style.display = 'none';
+            return;
+        }
+        let schema;
+        try { schema = JSON.parse(selectedBot.env_vars_schema); } catch(e) { schema = []; }
+        if (!schema.length) {
+            document.getElementById('envVarsSection').style.display = 'none';
+            return;
+        }
+        document.getElementById('envVarsSection').style.display = 'block';
+        container.innerHTML = '';
+        for (const v of schema) {
+            const row = document.createElement('div');
+            row.className = 'env-row';
+            row.innerHTML = `
+                <input type="text" class="env-key" value="${escapeHtml(v.key)}" readonly data-key="${escapeHtml(v.key)}">
+                <input type="text" class="env-value" placeholder="Valeur" id="env_${escapeHtml(v.key)}" ${v.required ? 'required' : ''}>
+                ${v.required ? '<span class="env-required">* requis</span>' : ''}
+            `;
+            container.appendChild(row);
+            if (v.default) document.getElementById(`env_${v.key}`).value = v.default;
+            const input = document.getElementById(`env_${v.key}`);
+            if (input) {
+                envVars[v.key] = input.value;
+                input.addEventListener('input', (e) => { envVars[v.key] = e.target.value; updateDeployBtn(); });
+            }
+        }
+    }
+    
+    function checkRequiredVars() {
+        if (!selectedBot || !selectedBot.env_vars_schema) return true;
+        try {
+            const schema = JSON.parse(selectedBot.env_vars_schema);
+            for (const v of schema) {
+                if (v.required && (!envVars[v.key] || !envVars[v.key].trim())) return false;
+            }
+        } catch(e) {}
+        return true;
+    }
+    
+    function updateDeployBtn() {
+        const btn = document.getElementById('deployBtn');
+        if (!selectedBot) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-rocket"></i> Déployer (10 coins)';
+            return;
+        }
+        const hasEnoughCoins = (currentUser?.coins || 0) >= 10;
+        const varsOk = checkRequiredVars();
+        if (!hasEnoughCoins) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-coins"></i> Coins insuffisants';
+        } else if (!varsOk) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Variables requises';
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-rocket"></i> Déployer (10 coins)';
+        }
+    }
+    
+    // ========== DÉPLOIEMENT ==========
+    async function deployBot() {
+        if (!selectedBot) { showToast('Sélectionnez un bot', 'error'); return; }
+        if ((currentUser?.coins || 0) < 10) { showToast('Coins insuffisants', 'error'); return; }
+        if (!checkRequiredVars()) { showToast('Remplissez toutes les variables requises', 'error'); return; }
+        
+        const modal = document.getElementById('deployModal');
+        const deployMessage = document.getElementById('deployMessage');
+        modal.classList.add('active');
+        deployMessage.innerHTML = 'Initialisation du déploiement...';
+        
+        try {
+            const deployData = { bot_id: selectedBot.id, env_vars: envVars };
+            const response = await fetchAPI('/api/hosting/deploy', {
+                method: 'POST',
+                body: JSON.stringify(deployData)
+            });
+            
+            if (response.success) {
+                deployMessage.innerHTML = '✅ Déploiement lancé avec succès !';
+                showToast('Déploiement en cours...', 'success');
+                await loadUserProfile();
+                setTimeout(async () => {
+                    modal.classList.remove('active');
+                    await loadMyServers();
+                    showToast('Déploiement terminé !', 'success');
+                }, 3000);
+            } else {
+                throw new Error(response.error || 'Erreur lors du déploiement');
+            }
+        } catch(e) {
+            deployMessage.innerHTML = `❌ ${e.message}`;
+            showToast(e.message, 'error');
+            setTimeout(() => modal.classList.remove('active'), 2000);
+        }
+    }
+    
+    // ========== MES SERVEURS ==========
+    async function loadMyServers() {
+        try {
+            const data = await fetchAPI('/api/hosting/my-servers');
+            if (data.success && data.servers) {
+                myServers = data.servers;
+                renderServersList();
+                if (myServers.length > 0 && !currentServer) {
+                    selectServer(myServers[0].id);
+                }
+            }
+        } catch(e) { console.error('Erreur chargement serveurs:', e); }
+    }
+    
+    function renderServersList() {
+        const container = document.getElementById('serversList');
+        if (!myServers.length) {
+            container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-muted);"><i class="fas fa-server"></i><p>Aucun bot déployé</p></div>';
+            return;
+        }
+        
+        const getStatusClass = (status) => {
+            const map = { 'running': 'running', 'stopped': 'stopped', 'suspended': 'suspended', 'deploying': 'deploying', 'failed': 'failed' };
+            return map[status] || 'stopped';
+        };
+        
+        const getStatusText = (status) => {
+            const map = { 'running': '✅ En ligne', 'stopped': '⏹️ Arrêté', 'suspended': '⏸️ Suspendu', 'deploying': '⏳ Déploiement', 'failed': '❌ Échec' };
+            return map[status] || status;
+        };
+        
+        container.innerHTML = myServers.map(s => `
+            <div class="server-item ${currentServer?.id === s.id ? 'active' : ''}" onclick="selectServer(${s.id})">
+                <div class="server-name">
+                    <span><i class="fas fa-robot"></i> ${escapeHtml(s.bot_name)}</span>
+                    <span class="server-status ${getStatusClass(s.server_status)}">${getStatusText(s.server_status)}</span>
+                </div>
+                <div class="server-days">
+                    <i class="fas fa-calendar"></i> Expire dans ${s.days_remaining} jours | ${s.coins_remaining || 0} coins restants
+                </div>
+                <div class="server-actions">
+                    <button class="server-action-btn" onclick="event.stopPropagation(); selectServer(${s.id})"><i class="fas fa-terminal"></i> Console</button>
+                    <button class="server-action-btn" onclick="event.stopPropagation(); renewServerById(${s.id})"><i class="fas fa-coins"></i> Renouveler</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // ========== SÉLECTION SERVEUR & CONSOLE SSE ==========
+    async function selectServer(serverId) {
+        try {
+            const data = await fetchAPI(`/api/hosting/status/${serverId}`);
+            if (data.success && data.server) {
+                currentServer = data.server;
+                document.getElementById('selectedServerCard').style.display = 'block';
+                document.getElementById('noServerCard').style.display = 'none';
+                document.getElementById('selectedServerName').innerText = currentServer.bot_name;
+                const statusText = currentServer.status === 'running' ? '✅ En ligne' : 
+                                  currentServer.status === 'stopped' ? '⏹️ Arrêté' : 
+                                  currentServer.status === 'suspended' ? '⏸️ Suspendu' : currentServer.status;
+                document.getElementById('selectedServerStatus').innerText = statusText;
+                document.getElementById('selectedServerStatus').className = `server-status ${currentServer.status}`;
+                document.getElementById('consoleInput').disabled = false;
+                document.getElementById('consoleSendBtn').disabled = false;
+                
+                if (currentSSE) currentSSE.close();
+                startConsoleSSE(serverId);
+                renderServersList();
+            }
+        } catch(e) { console.error('Erreur sélection serveur:', e); showToast('Erreur chargement serveur', 'error'); }
+    }
+    
+    function startConsoleSSE(serverId) {
+        const url = `${API_BASE}/api/servers/${serverId}/console/sse?token=${authToken}`;
+        const source = new EventSource(url);
+        currentSSE = source;
+        const outputDiv = document.getElementById('consoleOutput');
+        outputDiv.innerHTML = '<div class="console-line"><span class="console-time">--:--:--</span><span class="console-message sys">🔌 Connexion à la console...</span></div>';
+        
+        source.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                const time = new Date().toLocaleTimeString();
+                let msgClass = 'console-message';
+                if (data.type === 'console') {
+                    const line = document.createElement('div');
+                    line.className = 'console-line';
+                    line.innerHTML = `<span class="console-time">${time}</span><span class="${msgClass}">${escapeHtml(data.message)}</span>`;
+                    outputDiv.appendChild(line);
+                    line.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else if (data.type === 'status') {
+                    const line = document.createElement('div');
+                    line.className = 'console-line';
+                    line.innerHTML = `<span class="console-time">${time}</span><span class="console-message sys">📊 Statut: ${data.status}</span>`;
+                    outputDiv.appendChild(line);
+                } else if (data.type === 'error') {
+                    const line = document.createElement('div');
+                    line.className = 'console-line';
+                    line.innerHTML = `<span class="console-time">${time}</span><span class="console-message error">❌ ${escapeHtml(data.message)}</span>`;
+                    outputDiv.appendChild(line);
+                } else if (data.type === 'sys') {
+                    const line = document.createElement('div');
+                    line.className = 'console-line';
+                    line.innerHTML = `<span class="console-time">${time}</span><span class="console-message sys">🔧 ${escapeHtml(data.message)}</span>`;
+                    outputDiv.appendChild(line);
+                } else if (data.type === 'cmd_echo') {
+                    const line = document.createElement('div');
+                    line.className = 'console-line';
+                    line.innerHTML = `<span class="console-time">${time}</span><span class="console-message" style="color: var(--accent);">> ${escapeHtml(data.message)}</span>`;
+                    outputDiv.appendChild(line);
+                }
+            } catch(e) {}
+        };
+        
+        source.onerror = () => {
+            const line = document.createElement('div');
+            line.className = 'console-line';
+            line.innerHTML = `<span class="console-time">${new Date().toLocaleTimeString()}</span><span class="console-message warn">⚠️ Connexion perdue, reconnexion...</span>`;
+            outputDiv.appendChild(line);
+        };
+    }
+    
+    // ========== COMMANDES CONSOLE ==========
+    async function sendConsoleCommand() {
+        const input = document.getElementById('consoleInput');
+        const cmd = input.value.trim();
+        if (!cmd || !currentServer) return;
+        input.value = '';
+        const time = new Date().toLocaleTimeString();
+        const outputDiv = document.getElementById('consoleOutput');
+        const echoLine = document.createElement('div');
+        echoLine.className = 'console-line';
+        echoLine.innerHTML = `<span class="console-time">${time}</span><span class="console-message" style="color: var(--accent);">> ${escapeHtml(cmd)}</span>`;
+        outputDiv.appendChild(echoLine);
+        
+        try {
+            const res = await fetch(`${API_BASE}/api/servers/${currentServer.id}/console/command`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ command: cmd })
+            });
+            if (!res.ok) {
+                const errLine = document.createElement('div');
+                errLine.className = 'console-line';
+                errLine.innerHTML = `<span class="console-time">${new Date().toLocaleTimeString()}</span><span class="console-message error">❌ Erreur: ${res.status}</span>`;
+                outputDiv.appendChild(errLine);
+            }
+        } catch(e) {
+            const errLine = document.createElement('div');
+            errLine.className = 'console-line';
+            errLine.innerHTML = `<span class="console-time">${new Date().toLocaleTimeString()}</span><span class="console-message error">❌ ${e.message}</span>`;
+            outputDiv.appendChild(errLine);
+        }
+    }
+    
+    // ========== ACTIONS SERVEUR ==========
+    async function sendPowerAction(action) {
+        if (!currentServer) { showToast('Aucun serveur sélectionné', 'error'); return; }
+        try {
+            const res = await fetch(`${API_BASE}/api/hosting/power/${currentServer.id}`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast(`Action ${action} exécutée`, 'success');
+                setTimeout(() => selectServer(currentServer.id), 2000);
+            } else {
+                showToast(data.error || 'Erreur', 'error');
+            }
+        } catch(e) { showToast(e.message, 'error'); }
+    }
+    
+    async function renewCurrentServer() {
+        if (!currentServer) return;
+        await renewServerById(currentServer.id);
+    }
+    
+    async function renewServerById(serverId) {
+        try {
+            const res = await fetch(`${API_BASE}/api/hosting/renew/${serverId}`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast(`Serveur renouvelé pour 10 jours`, 'success');
+                await loadUserProfile();
+                await loadMyServers();
+                if (currentServer?.id === serverId) await selectServer(serverId);
+            } else {
+                showToast(data.error || 'Erreur renouvellement', 'error');
+            }
+        } catch(e) { showToast(e.message, 'error'); }
+    }
+    
+    // ========== SIDEBAR ==========
+    function openSidebar() {
+        document.getElementById('drawer').classList.add('open');
+        document.getElementById('drawerOverlay').classList.add('active');
+        document.getElementById('hamburgerBtn').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeSidebar() {
+        document.getElementById('drawer').classList.remove('open');
+        document.getElementById('drawerOverlay').classList.remove('active');
+        document.getElementById('hamburgerBtn').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    
+    // ========== PARTICULES ==========
+    function createParticles() {
+        const container = document.getElementById('particles');
+        if (!container) return;
+        for (let i = 0; i < 50; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 15 + 's';
+            p.style.animationDuration = (6 + Math.random() * 22) + 's';
+            p.style.width = (2 + Math.random() * 6) + 'px';
+            p.style.height = p.style.width;
+            container.appendChild(p);
+        }
+    }
+    createParticles();
+    
+    // ========== INITIALISATION ==========
+    document.getElementById('hamburgerBtn').onclick = () => {
+        document.getElementById('drawer').classList.contains('open') ? closeSidebar() : openSidebar();
+    };
+    document.getElementById('drawerOverlay').onclick = closeSidebar;
+    document.getElementById('closeDrawerBtn').onclick = closeSidebar;
+    document.getElementById('avatarBtn').onclick = openSidebar;
+    document.getElementById('deployBtn').onclick = deployBot;
+    document.getElementById('consoleSendBtn').onclick = sendConsoleCommand;
+    document.getElementById('consoleInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendConsoleCommand();
+    });
+    document.getElementById('logoutBtn').onclick = () => {
+        localStorage.removeItem('bothub_token');
+        localStorage.removeItem('token');
+        window.location.href = '/';
+    };
+    document.querySelectorAll('.nav-item').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href && href !== '/deploy') window.location.href = href;
+        });
+    });
+    
+    setTimeout(() => {
+        const swipe = document.getElementById('swipeIndicator');
+        if (swipe) swipe.classList.add('hide');
+    }, 5000);
+    
+    (async () => {
+        await loadUserProfile();
+        await loadBots();
+        await loadMyServers();
+        setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                loadMyServers();
+                if (currentServer) loadUserProfile();
+            }
+        }, 30000);
+    })();
+</script>
 </body>
 </html>
