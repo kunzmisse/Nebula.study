@@ -2,83 +2,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const homeSection = document.getElementById("home-section");
     const loaderScreen = document.getElementById("loader-screen");
     const appSection = document.getElementById("app-section");
+    const quizSection = document.getElementById("quiz-section");
     const adminSection = document.getElementById("admin-section");
     
     const accessBtn = document.getElementById("access-btn");
+    const quizBtn = document.getElementById("quiz-btn");
     const adminOpenBtn = document.getElementById("admin-open-btn");
-    const adminCloseBtn = document.getElementById("admin-close-btn");
+    
     const backHomeBtn = document.getElementById("back-home-btn");
+    const backHomeQuizBtn = document.getElementById("back-home-quiz-btn");
+    const adminCloseBtn = document.getElementById("admin-close-btn");
+    
     const generateBtn = document.getElementById("generate-btn");
     const courseInput = document.getElementById("course-input");
     const resultBox = document.getElementById("result-box");
 
-    function hideAll() {
-        homeSection.classList.add("hidden");
-        loaderScreen.classList.add("hidden");
-        appSection.classList.add("hidden");
-        adminSection.classList.add("hidden");
-    }
-
     function showLoaderAndExecute(callback) {
-        hideAll();
+        homeSection.classList.add("hidden");
+        appSection.classList.add("hidden");
+        quizSection.classList.add("hidden");
+        adminSection.classList.add("hidden");
         loaderScreen.classList.remove("hidden");
 
         setTimeout(() => {
             loaderScreen.classList.add("hidden");
             callback();
-        }, 1000);
+        }, 900);
     }
 
-    // Clic pour accéder aux fonctionnalités de révision
-    if (accessBtn) {
-        accessBtn.addEventListener("click", () => {
-            showLoaderAndExecute(() => {
-                appSection.classList.remove("hidden");
-            });
-        });
-    }
+    accessBtn?.addEventListener("click", () => showLoaderAndExecute(() => appSection.classList.remove("hidden")));
+    quizBtn?.addEventListener("click", () => showLoaderAndExecute(() => quizSection.classList.remove("hidden")));
+    backHomeBtn?.addEventListener("click", () => showLoaderAndExecute(() => homeSection.classList.remove("hidden")));
+    backHomeQuizBtn?.addEventListener("click", () => showLoaderAndExecute(() => homeSection.classList.remove("hidden")));
+    adminCloseBtn?.addEventListener("click", () => showLoaderAndExecute(() => homeSection.classList.remove("hidden")));
 
-    // Bouton de retour accueil
-    if (backHomeBtn) {
-        backHomeBtn.addEventListener("click", () => {
-            showLoaderAndExecute(() => {
-                homeSection.classList.remove("hidden");
-            });
-        });
-    }
+    generateBtn?.addEventListener("click", () => {
+        if (!courseInput.value.trim()) {
+            alert("Veuillez coller un cours d'abord !");
+            return;
+        }
+        resultBox.innerHTML = "<strong>✨ Analyse terminée avec succès !</strong><br><br>• Résumé : Document structuré.<br>• Flashcards : 5 cartes prêtes.";
+    });
 
-    // Simulation de génération de cours
-    if (generateBtn) {
-        generateBtn.addEventListener("click", () => {
-            if (!courseInput.value.trim()) {
-                alert("Veuillez coller un cours d'abord !");
-                return;
-            }
-            resultBox.innerHTML = "<strong>✨ Résumé généré avec succès !</strong><br>• 5 Flashcards créées.<br>• 3 Quiz prêts.";
-        });
-    }
-
-    // Sécurité Administrateur avec mot de passe (admin123)
-    if (adminOpenBtn) {
-        adminOpenBtn.addEventListener("click", () => {
-            const password = prompt("Entrez le mot de passe administrateur :");
-            if (password === "admin123") {
-                showLoaderAndExecute(() => {
-                    adminSection.classList.remove("hidden");
-                });
-            } else if (password !== null) {
-                alert("Mot de passe incorrect !");
-            }
-        });
-    }
-
-    // Fermer l'Admin
-    if (adminCloseBtn) {
-        adminCloseBtn.addEventListener("click", () => {
-            showLoaderAndExecute(() => {
-                homeSection.classList.remove("hidden");
-            });
-        });
-    }
+    adminOpenBtn?.addEventListener("click", () => {
+        const password = prompt("Mot de passe administrateur :");
+        if (password === "admin123") {
+            showLoaderAndExecute(() => adminSection.classList.remove("hidden"));
+        } else if (password !== null) {
+            alert("Mot de passe incorrect !");
+        }
+    });
 });
-
