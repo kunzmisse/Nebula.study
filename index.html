@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- SECTION ACCUEIL -->
+    <!-- 1. SECTION ACCUEIL -->
     <div id="home-section" class="container">
         <h1>NebulaStudy AI</h1>
         <p>Plateforme intelligente de synthèse de cours, de génération de flashcards et de quiz sur-mesure.</p>
@@ -17,8 +17,8 @@
             <h3>Règles d'utilisation</h3>
             <ul>
                 <li>Respectez la propriété intellectuelle des cours.</li>
-                <li>Usage strictement réservé aux révisions.</li>
-                <li>Tout abus entraîne un bannissement.</li>
+                <li>Usage strictement réservé aux révisions académiques.</li>
+                <li>Tout abus entraînera un bannissement.</li>
             </ul>
         </div>
 
@@ -34,13 +34,25 @@
         <p style="font-weight:600; margin-bottom:0;">Patientez s'il vous plaît...</p>
     </div>
 
-    <!-- SECTION ADMIN (Isolée) -->
+    <!-- 2. SECTION FONCTIONNALITÉS (L'application de révision) -->
+    <div id="app-section" class="container hidden">
+        <h1>Espace Révision</h1>
+        <p>Collez votre cours ci-dessous pour générer vos outils :</p>
+        <textarea id="course-input" placeholder="Collez votre cours ici..."></textarea>
+        <button id="generate-btn" class="btn-primary">Générer les Flashcards & Résumé</button>
+        <div id="result-box" style="margin-top: 15px; text-align: left; font-size: 0.9rem;"></div>
+        <br>
+        <button id="back-home-btn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; text-decoration:underline;">← Retour à l'accueil</button>
+    </div>
+
+    <!-- 3. SECTION ADMIN (Isolée et sécurisée) -->
     <div id="admin-section" class="container hidden">
         <h1>Tableau de Bord</h1>
         <p>Espace sécurisé administrateur.</p>
-        <div class="rules-box">
-            <p><strong>Visiteurs :</strong> 3</p>
-            <p><strong>Messages :</strong> 1</p>
+        <div class="rules-box" style="text-align: left;">
+            <p><strong>Visiteurs totaux :</strong> 142</p>
+            <p><strong>Messages reçus :</strong> 3</p>
+            <p style="margin-top:10px; color:var(--accent-primary);"><strong>Statut :</strong> Système opérationnel</p>
         </div>
         <button id="admin-close-btn" class="btn-primary">Fermer l'Admin</button>
     </div>
@@ -48,3 +60,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
