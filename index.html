@@ -8,51 +8,73 @@
 </head>
 <body>
 
-    <!-- 1. SECTION ACCUEIL -->
+    <!-- ACCUEIL RICHE ET DÉTAILLÉ -->
     <div id="home-section" class="container">
         <h1>NebulaStudy AI</h1>
-        <p>Plateforme intelligente de synthèse de cours, de génération de flashcards et de quiz sur-mesure.</p>
+        <p class="subtitle">L'écosystème intelligent ultime pour optimiser vos révisions, synthétiser vos cours et tester vos connaissances.</p>
         
-        <div class="rules-box">
-            <h3>Règles d'utilisation</h3>
-            <ul>
-                <li>Respectez la propriété intellectuelle des cours.</li>
-                <li>Usage strictement réservé aux révisions académiques.</li>
-                <li>Tout abus entraînera un bannissement.</li>
-            </ul>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>01 — Synthèse Intelligente</h3>
+                <p>Transformez des dizaines de pages de cours complexes en résumés clairs, précis et structurés en quelques secondes.</p>
+            </div>
+            <div class="feature-card">
+                <h3>02 — Flashcards Automatiques</h3>
+                <p>Mémorisez plus efficacement grâce à la génération instantanée de cartes de révision interactives.</p>
+            </div>
+            <div class="feature-card">
+                <h3>03 — Examens & Quiz Blancs</h3>
+                <p>Testez votre niveau avec des questionnaires sur-mesure générés directement à partir de vos documents.</p>
+            </div>
         </div>
 
-        <button id="access-btn" class="btn-primary">Accéder aux fonctionnalités →</button>
-        <div style="margin-top: 15px;">
-            <button id="admin-open-btn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.85rem; text-decoration: underline;">Accès Administrateur</button>
+        <button id="access-btn" class="btn-primary">Accéder aux Synthèses & Flashcards →</button>
+        <button id="quiz-btn" class="btn-secondary">Lancer un Quiz d'Examen</button>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button id="admin-open-btn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.85rem; text-decoration:underline;">Accès Administrateur</button>
         </div>
     </div>
 
-    <!-- ÉCRAN DE CHARGEMENT -->
+    <!-- CHARGEMENT -->
     <div id="loader-screen" class="container hidden">
         <div class="spinner"></div>
-        <p style="font-weight:600; margin-bottom:0;">Patientez s'il vous plaît...</p>
+        <p style="font-weight:600; margin-bottom:0;">Chargement de l'espace intelligent...</p>
     </div>
 
-    <!-- 2. SECTION FONCTIONNALITÉS (L'application de révision) -->
+    <!-- ESPACE APPLICATION / SYNTHÈSE -->
     <div id="app-section" class="container hidden">
-        <h1>Espace Révision</h1>
-        <p>Collez votre cours ci-dessous pour générer vos outils :</p>
-        <textarea id="course-input" placeholder="Collez votre cours ici..."></textarea>
-        <button id="generate-btn" class="btn-primary">Générer les Flashcards & Résumé</button>
-        <div id="result-box" style="margin-top: 15px; text-align: left; font-size: 0.9rem;"></div>
+        <h1>Espace de Travail</h1>
+        <p class="subtitle">Collez votre cours ci-dessous pour lancer l'analyse.</p>
+        <textarea id="course-input" placeholder="Collez votre cours ou vos notes ici..."></textarea>
+        <button id="generate-btn" class="btn-primary">Générer le contenu</button>
+        <div id="result-box" style="margin-top: 20px; text-align: left; font-size: 0.9rem;"></div>
         <br>
         <button id="back-home-btn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; text-decoration:underline;">← Retour à l'accueil</button>
     </div>
 
-    <!-- 3. SECTION ADMIN (Isolée et sécurisée) -->
+    <!-- ESPACE QUIZ SÉPARÉ -->
+    <div id="quiz-section" class="container hidden">
+        <h1>Session Quiz & Examen</h1>
+        <p class="subtitle">Évaluez vos connaissances avec des questions dynamiques.</p>
+        <div class="feature-card" style="margin-bottom: 20px;">
+            <h3>Question 1 :</h3>
+            <p>Quel est l'objectif principal de NebulaStudy AI ?</p>
+            <div style="margin-top: 10px;">
+                <button class="btn-primary" style="padding: 10px; font-size: 0.9rem; margin-bottom: 8px;">A) Optimiser et accélérer les révisions</button>
+                <button class="btn-primary" style="padding: 10px; font-size: 0.9rem; margin-bottom: 0;">B) Remplacer les examens</button>
+            </div>
+        </div>
+        <button id="back-home-quiz-btn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; text-decoration:underline;">← Retour à l'accueil</button>
+    </div>
+
+    <!-- ADMIN -->
     <div id="admin-section" class="container hidden">
         <h1>Tableau de Bord</h1>
-        <p>Espace sécurisé administrateur.</p>
-        <div class="rules-box" style="text-align: left;">
-            <p><strong>Visiteurs totaux :</strong> 142</p>
-            <p><strong>Messages reçus :</strong> 3</p>
-            <p style="margin-top:10px; color:var(--accent-primary);"><strong>Statut :</strong> Système opérationnel</p>
+        <p class="subtitle">Panneau de contrôle sécurisé.</p>
+        <div class="feature-card" style="margin-bottom: 20px;">
+            <p><strong>Statut du système :</strong> Opérationnel</p>
+            <p><strong>Sécurité :</strong> Active</p>
         </div>
         <button id="admin-close-btn" class="btn-primary">Fermer l'Admin</button>
     </div>
@@ -60,4 +82,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
